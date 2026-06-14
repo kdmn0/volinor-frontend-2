@@ -7,19 +7,23 @@
 export const PART_OPTIONS = {
   subtitle1: {
     name: "MODELLEME",
-    description: "1.1",
+    description:
+      "Savunma ve havacılık projeleri için yüksek hassasiyetli 3D modelleme ve tasarım hizmetleri sunuyoruz. CAD tabanlı süreçlerle, kavramsal tasarımdan üretime hazır mühendislik modellerine kadar her aşamada özgün ve uygulanabilir çözümler geliştiriyoruz.",
   },
   subtitle2: {
     name: "SİMÜLASYON",
-    description: "2.2",
+    description:
+      "Gerçek operasyon koşullarını yansıtan senaryo tabanlı simülasyonlarla, tasarımların performansını üretim öncesinde test ediyoruz. Bu sayede riskler erken aşamada tespit edilir, geliştirme süreçleri hızlanır ve maliyet verimliliği sağlanır.",
   },
   subtitle3: {
     name: "İLERİ MALZEME",
-    description: "3.3",
+    description:
+      "Savunma sanayinin zorlu gereksinimlerine uygun ileri kompozit malzemeler üzerinde Ar-Ge ve analiz çalışmaları yürütüyoruz. Hafiflik, dayanıklılık ve performans dengesini optimize eden malzeme çözümleriyle projelere katma değer sağlıyoruz.",
   },
   subtitle4: {
     name: "YAPAY ZEKA",
-    description: "4.4",
+    description:
+      "Otonom sistemler ve akıllı platformlar için yapay zeka tabanlı algoritmalar geliştiriyoruz. Görüntü işleme, karar destek ve otonom kontrol gibi alanlarda, savunma sanayinin geleceğine yön veren yenilikçi çözümler üretiyoruz.",
   },
   subtitle5: {
     name: "5",

@@ -23,6 +23,8 @@ export const CircularMenu = ({ isNavOpen, setIsNavOpen, menuItems, selectedPart,
   const circleSize = 800;
   const leftOffset = -550;
 
+  const [isPartsOpen, setIsPartsOpen] = useState(false);
+
   return (
     <>
       {/* Masaüstü Dairesel Menü Arka Plan Çizgisi */}
@@ -34,16 +36,38 @@ export const CircularMenu = ({ isNavOpen, setIsNavOpen, menuItems, selectedPart,
         </div>
       )}
 
+      {/* Mobil Parça Menüsü Açma/Kapama Butonu */}
+      <AnimatePresence>
+        {isMobile && !isNavOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
+          >
+            <div
+              className="flex items-center justify-center w-8 h-16 bg-black/60 backdrop-blur-md border border-white/10 border-l-0 rounded-r-xl cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+              onClick={() => setIsPartsOpen(!isPartsOpen)}
+            >
+              <div className="flex flex-col gap-1 items-center justify-center">
+                <div className={`w-[2px] h-3 bg-white/70 rounded-full transition-transform duration-300 origin-bottom ${isPartsOpen ? "-rotate-45" : "rotate-45"}`} />
+                <div className={`w-[2px] h-3 bg-white/70 rounded-full transition-transform duration-300 origin-top ${isPartsOpen ? "rotate-45" : "-rotate-45"}`} />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Menü Elemanları */}
       <AnimatePresence>
-        {!isNavOpen && (
+        {!isNavOpen && (!isMobile || isPartsOpen) && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            initial={isMobile ? { opacity: 0, x: -50 } : { opacity: 0, scale: 0.95 }}
+            animate={isMobile ? { opacity: 1, x: 0 } : { opacity: 1, scale: 1 }}
+            exit={isMobile ? { opacity: 0, x: -50 } : { opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className={isMobile 
-              ? "absolute left-6 top-1/2 -translate-y-1/2 z-20 pointer-events-auto flex flex-col gap-8" 
+              ? "absolute left-10 top-1/2 -translate-y-1/2 z-20 pointer-events-auto flex flex-col gap-8 pl-2" 
               : "absolute top-1/2 -translate-y-1/2 z-20 pointer-events-none"}
             style={isMobile 
               ? {} 
@@ -51,7 +75,7 @@ export const CircularMenu = ({ isNavOpen, setIsNavOpen, menuItems, selectedPart,
             
             {/* Mobilde Menü Öğelerini Bağlayan İnce Timeline Çizgisi */}
             {isMobile && (
-              <div className="absolute left-[22px] top-4 bottom-4 w-[1px] bg-white/10 z-0" />
+              <div className="absolute left-[30px] top-4 bottom-4 w-[1px] bg-white/10 z-0" />
             )}
 
             {menuItems.map((item, index) => {
@@ -63,7 +87,12 @@ export const CircularMenu = ({ isNavOpen, setIsNavOpen, menuItems, selectedPart,
                   <div
                     key={item.id}
                     className="relative flex items-center cursor-pointer group min-h-[44px] z-10"
-                    onClick={() => setSelectedPart(isSelected ? null : item.id)}>
+                    onClick={() => {
+                      setSelectedPart(isSelected ? null : item.id);
+                      if (!isSelected) {
+                        setIsPartsOpen(false); // İsteğe bağlı: Seçim yapınca menüyü kapat
+                      }
+                    }}>
                     
                     {/* Düğüm (Node) */}
                     <div className="relative flex items-center justify-center min-w-[44px] min-h-[44px]">
@@ -82,7 +111,7 @@ export const CircularMenu = ({ isNavOpen, setIsNavOpen, menuItems, selectedPart,
                     </div>
 
                     {/* Metinler (Sağ Tarafta) */}
-                    <div className="flex flex-col items-start ml-4 whitespace-nowrap">
+                    <div className="flex flex-col items-start ml-4 whitespace-nowrap bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-white/5">
                       <div
                         className={`text-sm font-semibold tracking-[0.15em] transition-all duration-300 ${isSelected ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/70 group-hover:text-white"}`}>
                         {item.label}

@@ -61,24 +61,23 @@ export const ConfigPanel = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="absolute inset-0 pointer-events-none z-10">
-          
           {/* Dairesel Seçim Menüsü */}
-          <CircularMenu 
-            isNavOpen={isNavOpen} 
+          <CircularMenu
+            isNavOpen={isNavOpen}
             setIsNavOpen={(val) => {
               setIsNavOpen(val);
               if (!val) setActivePage(null);
-            }} 
-            menuItems={menuItems} 
-            selectedPart={selectedPart} 
-            setSelectedPart={setSelectedPart} 
+            }}
+            menuItems={menuItems}
+            selectedPart={selectedPart}
+            setSelectedPart={setSelectedPart}
           />
 
           {/* Sol Açılır Menü */}
-          <SidebarMenu 
-            isNavOpen={isNavOpen} 
-            activePage={activePage} 
-            setActivePage={setActivePage} 
+          <SidebarMenu
+            isNavOpen={isNavOpen}
+            activePage={activePage}
+            setActivePage={setActivePage}
           />
 
           {/* Sağ Seçili Eleman Bilgi Paneli */}
@@ -93,7 +92,7 @@ export const ConfigPanel = () => {
                 <h2 className="text-lg md:text-xl font-light text-white mb-2 tracking-widest uppercase">
                   {partData.name}
                 </h2>
-                <p className="text-gray-400 text-xs mb-2 md:mb-8 line-clamp-3 md:line-clamp-none">
+                <p className="text-gray-400 text-base mb-2 md:mb-8 max-h-32 md:max-h-none overflow-y-auto md:overflow-visible pr-1">
                   {partData.description}
                 </p>
               </motion.div>
@@ -110,15 +109,13 @@ export const ConfigPanel = () => {
           </div>
 
           {/* Tam Ekran Bilgi ve Form Modalı */}
-          <PageModal 
-            activePage={activePage} 
-            setActivePage={setActivePage} 
+          <PageModal
+            activePage={activePage}
+            setActivePage={setActivePage}
             setIsNavOpen={setIsNavOpen}
           />
-
         </motion.div>
       )}
     </AnimatePresence>
   );
 };
-
