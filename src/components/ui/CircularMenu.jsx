@@ -56,7 +56,7 @@ export const CircularMenu = ({
 
   const radius = 400 * sm;
   const circleSize = 800 * sm;
-  const leftOffset = -550 * sm;
+  const leftOffset = -450 * sm;
 
   // Font boyutu layout kadar hızlı küçülmez: 1'den sapma yarı hızda uygulanır.
   // sm=0.88 → fontSm=0.94, sm=1.0 → fontSm=1.0, sm=1.35 → fontSm=1.175
@@ -67,8 +67,8 @@ export const CircularMenu = ({
   const nodeSize    = Math.max(36, Math.round(40  * sm));
   const dotLg       = Math.max(10, Math.round(12  * sm));
   const dotSm       = Math.max(5,  Math.round(6   * sm));
-  const textW       = Math.max(132, Math.round(150 * sm));
-  const textMR      = Math.max(12,  Math.round(14  * sm));
+  const textW       = Math.max(175, Math.round(195 * sm));
+  const textMR      = Math.max(14,  Math.round(16  * sm));
   const labelPx     = Math.max(13,  Math.round(16  * fontSm));
   const subPx       = Math.max(10,  Math.round(12  * fontSm));
   const menuLabelPx = Math.max(10,  Math.round(12  * fontSm));
@@ -217,7 +217,7 @@ export const CircularMenu = ({
 
                   {/* Etiket */}
                   <div
-                    className="flex flex-col items-start"
+                    className="flex flex-col items-start whitespace-nowrap"
                     style={{ width: `${textW}px`, marginRight: `${textMR}px` }}>
                     <div
                       className={`font-semibold tracking-[0.15em] transition-all duration-300 ${
