@@ -8,12 +8,13 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 
 // Referans masaüstü çözünürlüğü (bu boyutta ölçek = 1.0 olur)
-const BASE_WIDTH = 1920;
-const BASE_HEIGHT = 1080;
+// 1600×900 baz alınarak 1920×1080'de ölçek ~1.2 olur → daha büyük menü
+const BASE_WIDTH = 1600;
+const BASE_HEIGHT = 900;
 
 // Menünün aşırı küçülüp büyümesini engelleyen sınırlar
 const MIN_SCALE = 0.9;
-const MAX_SCALE = 1.35;
+const MAX_SCALE = 1.5;
 const MOBILE_BREAKPOINT = 768;
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
@@ -59,6 +60,10 @@ export const CircularMenu = ({
   const leftOffset = -550 * scaleMultiplier;
 
   const [isPartsOpen, setIsPartsOpen] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState(null);
+
+  // Ölçeklenmiş piksel değeri hesaplama fonksiyonu
+  const s = (px) => px * scaleMultiplier;
 
   return (
     <>
@@ -132,6 +137,7 @@ export const CircularMenu = ({
 
             {menuItems.map((item, index) => {
               const isSelected = selectedPart === item.id;
+              const isHovered = hoveredItem === item.id;
 
               if (isMobile) {
                 // MOBİL TASARIM (Timeline / Stepper Görünümü)
@@ -189,41 +195,142 @@ export const CircularMenu = ({
               return (
                 <div
                   key={item.id}
-                  className="absolute flex items-center pointer-events-auto cursor-pointer group min-h-[44px]"
+                  className="absolute flex items-center pointer-events-auto cursor-pointer"
                   style={{
                     left: `${x}px`,
                     top: `${y}px`,
-                    transform: `translate(-100%, -50%) scale(${scaleMultiplier})`,
+                    transform: "translate(-100%, -50%)",
                     transformOrigin: "right center",
+                    minHeight: `${s(44)}px`,
                   }}
+                  onMouseEnter={() => setHoveredItem(item.id)}
+                  onMouseLeave={() => setHoveredItem(null)}
                   onClick={() => setSelectedPart(isSelected ? null : item.id)}>
                   {/* Masaüstü Sol Aktif Çizgi */}
-                  <div className="absolute -left-4 top-1/2 -translate-y-1/2 flex items-center justify-center h-20">
+                  <div
+                    className="absolute top-1/2 -translate-y-1/2 flex items-center justify-center"
+                    style={{
+                      left: `${-s(16)}px`,
+                      height: `${s(80)}px`,
+                    }}>
                     <div
-                      className={`w-[3px] rounded-full transition-all duration-300 ${isSelected ? "h-20 bg-[#00e5ff] shadow-[0_0_15px_#00e5ff]" : "h-0 bg-[#00e5ff]/50 group-hover:h-12 group-hover:bg-[#00e5ff] group-hover:shadow-[0_0_10px_#00e5ff]"}`}
+                      className="rounded-full transition-all duration-300"
+                      style={{
+                        width: `${s(3)}px`,
+                        height: isSelected
+                          ? `${s(80)}px`
+                          : isHovered
+                            ? `${s(48)}px`
+                            : "0px",
+                        backgroundColor:
+                          isSelected || isHovered
+                            ? "#00e5ff"
+                            : "rgba(0,229,255,0.5)",
+                        boxShadow: isSelected
+                          ? "0 0 15px #00e5ff"
+                          : isHovered
+                            ? "0 0 10px #00e5ff"
+                            : "none",
+                      }}
                     />
                   </div>
 
-                  <div className="flex flex-col items-start mr-4 w-32 whitespace-nowrap">
+                  <div
+                    className="flex flex-col items-start whitespace-nowrap"
+                    style={{
+                      marginRight: `${s(16)}px`,
+                      width: `${s(128)}px`,
+                    }}>
                     <div
-                      className={`text-sm font-semibold tracking-[0.15em] transition-all duration-300 ${isSelected ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/70 group-hover:text-white"}`}>
+                      className="font-semibold transition-all duration-300"
+                      style={{
+                        fontSize: `${s(14)}px`,
+                        letterSpacing: "0.15em",
+                        color: isSelected
+                          ? "#00e5ff"
+                          : isHovered
+                            ? "white"
+                            : "rgba(255,255,255,0.7)",
+                        filter: isSelected
+                          ? "drop-shadow(0 0 8px rgba(0,229,255,0.5))"
+                          : "none",
+                      }}>
                       {item.label}
                     </div>
                     <div
-                      className={`text-[9px] font-medium tracking-[0.1em] mt-1 transition-all duration-300 ${isSelected ? "text-white/70" : "text-white/40 group-hover:text-white/60"}`}>
+                      className="font-medium transition-all duration-300"
+                      style={{
+                        fontSize: `${s(9)}px`,
+                        letterSpacing: "0.1em",
+                        marginTop: `${s(4)}px`,
+                        color: isSelected
+                          ? "rgba(255,255,255,0.7)"
+                          : isHovered
+                            ? "rgba(255,255,255,0.6)"
+                            : "rgba(255,255,255,0.4)",
+                      }}>
                       {item.subLabel}
                     </div>
                   </div>
 
-                  <div className="relative flex items-center justify-center translate-x-1/2 min-w-[44px] min-h-[44px]">
+                  <div
+                    className="relative flex items-center justify-center"
+                    style={{
+                      transform: "translateX(50%)",
+                      minWidth: `${s(44)}px`,
+                      minHeight: `${s(44)}px`,
+                    }}>
                     <div
-                      className={`absolute w-[2px] h-16 bg-gradient-to-b from-transparent via-[#00e5ff] to-transparent transition-opacity duration-300 ${isSelected ? "opacity-100 shadow-[0_0_10px_#00e5ff]" : "opacity-0"}`}
+                      className="absolute transition-opacity duration-300"
+                      style={{
+                        width: `${s(2)}px`,
+                        height: `${s(64)}px`,
+                        opacity: isSelected ? 1 : 0,
+                        background:
+                          "linear-gradient(to bottom, transparent, #00e5ff, transparent)",
+                        boxShadow: isSelected
+                          ? "0 0 10px #00e5ff"
+                          : "none",
+                      }}
                     />
                     <div
-                      className={`w-10 h-10 rounded-full border-[1px] transition-all duration-300 bg-[#020813] ${isSelected ? "border-[#00e5ff] bg-[#00e5ff]/10 shadow-[0_0_15px_rgba(0,229,255,0.3)] scale-110" : "border-white/20 group-hover:border-white/50 group-hover:bg-white/5 scale-90"}`}
+                      className="rounded-full transition-all duration-300"
+                      style={{
+                        width: `${s(isSelected ? 44 : isHovered ? 40 : 36)}px`,
+                        height: `${s(isSelected ? 44 : isHovered ? 40 : 36)}px`,
+                        borderWidth: "1px",
+                        borderStyle: "solid",
+                        borderColor: isSelected
+                          ? "#00e5ff"
+                          : isHovered
+                            ? "rgba(255,255,255,0.5)"
+                            : "rgba(255,255,255,0.2)",
+                        backgroundColor: isSelected
+                          ? "rgba(0,229,255,0.1)"
+                          : isHovered
+                            ? "rgba(255,255,255,0.05)"
+                            : "#020813",
+                        boxShadow: isSelected
+                          ? "0 0 15px rgba(0,229,255,0.3)"
+                          : "none",
+                      }}
                     />
                     <div
-                      className={`absolute rounded-full transition-all duration-300 ${isSelected ? "w-3 h-3 bg-white shadow-[0_0_15px_#00e5ff,0_0_30px_#00e5ff]" : "w-1.5 h-1.5 bg-white/60 group-hover:bg-white/90 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.5)]"}`}
+                      className="absolute rounded-full transition-all duration-300"
+                      style={{
+                        width: `${s(isSelected ? 12 : 6)}px`,
+                        height: `${s(isSelected ? 12 : 6)}px`,
+                        backgroundColor: isSelected
+                          ? "white"
+                          : isHovered
+                            ? "rgba(255,255,255,0.9)"
+                            : "rgba(255,255,255,0.6)",
+                        boxShadow: isSelected
+                          ? "0 0 15px #00e5ff, 0 0 30px #00e5ff"
+                          : isHovered
+                            ? "0 0 10px rgba(255,255,255,0.5)"
+                            : "none",
+                      }}
                     />
                   </div>
                 </div>
