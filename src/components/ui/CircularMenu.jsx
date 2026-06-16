@@ -1,7 +1,7 @@
 /**
  * CircularMenu.jsx
  * Ekranın sol tarafında yer alan dairesel tasarımlı seçim menüsüdür.
- * 3D model üzerindeki parçaların (Modelleme, Simülasyon vb.) seçilmesini 
+ * 3D model üzerindeki parçaların (Modelleme, Simülasyon vb.) seçilmesini
  * ve bu seçimlerin global state'e (store) gönderilmesini sağlar.
  */
 import { motion, AnimatePresence } from "motion/react";
@@ -12,7 +12,7 @@ const BASE_WIDTH = 1920;
 const BASE_HEIGHT = 1080;
 
 // Menünün aşırı küçülüp büyümesini engelleyen sınırlar
-const MIN_SCALE = 0.9;
+const MIN_SCALE = 0.65;
 const MAX_SCALE = 1.35;
 const MOBILE_BREAKPOINT = 768;
 
@@ -38,7 +38,7 @@ export const CircularMenu = ({
       setIsMobile(width < MOBILE_BREAKPOINT);
       setViewport({ width, height });
     };
-    handleResize(); // İlk yüklemede çalıştır
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -49,14 +49,28 @@ export const CircularMenu = ({
     viewport.width / BASE_WIDTH,
     viewport.height / BASE_HEIGHT,
   );
-  const scaleMultiplier = clamp(rawScale, MIN_SCALE, MAX_SCALE);
+  const sm = clamp(rawScale, MIN_SCALE, MAX_SCALE);
 
   const startAngle = -25;
   const endAngle = 25;
 
-  const radius = 400 * scaleMultiplier;
-  const circleSize = 800 * scaleMultiplier;
-  const leftOffset = -550 * scaleMultiplier;
+  const radius = 400 * sm;
+  const circleSize = 800 * sm;
+  const leftOffset = -550 * sm;
+
+  // Masaüstü öğe boyutları — CSS scale() kullanılmaz, gerçek piksel değerleri hesaplanır.
+  // Bu sayede translate(-100%, -50%) her zaman doğru çalışır ve metin keskinliği korunur.
+  const nodeSize    = Math.round(40 * sm);
+  const dotLg       = Math.round(12 * sm);
+  const dotSm       = Math.round(6 * sm);
+  const textW       = Math.round(128 * sm);
+  const textMR      = Math.round(16 * sm);
+  const labelPx     = Math.round(14 * sm);
+  const subPx       = Math.max(8, Math.round(9 * sm));
+  const menuLabelPx = Math.max(8, Math.round(10 * sm));
+  const activeLineH = Math.round(80 * sm);
+  const hoverLineH  = Math.round(48 * sm);
+  const vertLineH   = Math.round(64 * sm);
 
   const [isPartsOpen, setIsPartsOpen] = useState(false);
 
@@ -78,12 +92,10 @@ export const CircularMenu = ({
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
-          >
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 pointer-events-auto">
             <div
               className="flex items-center justify-center w-8 h-16 bg-black/60 backdrop-blur-md border border-white/10 border-l-0 rounded-r-xl cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)]"
-              onClick={() => setIsPartsOpen(!isPartsOpen)}
-            >
+              onClick={() => setIsPartsOpen(!isPartsOpen)}>
               <div className="flex flex-col gap-1 items-center justify-center">
                 <div className={`w-[2px] h-3 bg-white/70 rounded-full transition-transform duration-300 origin-bottom ${isPartsOpen ? "-rotate-45" : "rotate-45"}`} />
                 <div className={`w-[2px] h-3 bg-white/70 rounded-full transition-transform duration-300 origin-top ${isPartsOpen ? "rotate-45" : "-rotate-45"}`} />
@@ -101,13 +113,17 @@ export const CircularMenu = ({
             animate={isMobile ? { opacity: 1, x: 0 } : { opacity: 1, scale: 1 }}
             exit={isMobile ? { opacity: 0, x: -50 } : { opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className={isMobile 
-              ? "absolute left-10 top-1/2 -translate-y-1/2 z-20 pointer-events-auto flex flex-col gap-8 pl-2" 
-              : "absolute top-1/2 -translate-y-1/2 z-20 pointer-events-none"}
-            style={isMobile 
-              ? {} 
-              : { left: `${leftOffset}px`, width: `${circleSize}px`, height: `${circleSize}px` }}>
-            
+            className={
+              isMobile
+                ? "absolute left-10 top-1/2 -translate-y-1/2 z-20 pointer-events-auto flex flex-col gap-8 pl-2"
+                : "absolute top-1/2 -translate-y-1/2 z-20 pointer-events-none"
+            }
+            style={
+              isMobile
+                ? {}
+                : { left: `${leftOffset}px`, width: `${circleSize}px`, height: `${circleSize}px` }
+            }>
+
             {/* Mobilde Menü Öğelerini Bağlayan İnce Timeline Çizgisi */}
             {isMobile && (
               <div className="absolute left-[30px] top-4 bottom-4 w-[1px] bg-white/10 z-0" />
@@ -124,22 +140,17 @@ export const CircularMenu = ({
                     className="relative flex items-center cursor-pointer group min-h-[44px] z-10"
                     onClick={() => {
                       setSelectedPart(isSelected ? null : item.id);
-                      if (!isSelected) {
-                        setIsPartsOpen(false); // İsteğe bağlı: Seçim yapınca menüyü kapat
-                      }
+                      if (!isSelected) setIsPartsOpen(false);
                     }}>
-                    
+
                     {/* Düğüm (Node) */}
                     <div className="relative flex items-center justify-center min-w-[44px] min-h-[44px]">
-                      {/* Seçili Düğümdeki Parlak Dikey Çizgi */}
                       <div
                         className={`absolute w-[2px] h-14 bg-gradient-to-b from-transparent via-[#00e5ff] to-transparent transition-opacity duration-300 ${isSelected ? "opacity-100 shadow-[0_0_10px_#00e5ff]" : "opacity-0"}`}
                       />
-                      {/* Dış Halka */}
                       <div
                         className={`w-10 h-10 rounded-full border-[1px] transition-all duration-300 bg-[#020813] ${isSelected ? "border-[#00e5ff] shadow-[0_0_15px_rgba(0,229,255,0.3)] scale-110" : "border-white/20 group-hover:border-white/50 scale-90"}`}
                       />
-                      {/* İç Nokta */}
                       <div
                         className={`absolute rounded-full transition-all duration-300 ${isSelected ? "w-3 h-3 bg-white shadow-[0_0_15px_#00e5ff,0_0_30px_#00e5ff]" : "w-1.5 h-1.5 bg-white/60 group-hover:bg-white/90 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.5)]"}`}
                       />
@@ -171,36 +182,89 @@ export const CircularMenu = ({
               return (
                 <div
                   key={item.id}
-                  className="absolute flex items-center pointer-events-auto cursor-pointer group min-h-[44px]"
+                  className="absolute flex items-center pointer-events-auto cursor-pointer group"
                   style={{
                     left: `${x}px`,
                     top: `${y}px`,
-                    transform: `translate(-100%, -50%) scale(${scaleMultiplier})`,
-                    transformOrigin: "right center",
+                    // CSS scale() KULLANILMAZ — tüm boyutlar zaten sm ile ölçeklenmiş inline style ile verilir.
+                    // scale() kullanmak translate(-100%) hesabını bozar ve çifte ölçeklemeye yol açar.
+                    transform: "translate(-100%, -50%)",
+                    minHeight: "44px",
                   }}
                   onClick={() => setSelectedPart(isSelected ? null : item.id)}>
-                  
-                  {/* Masaüstü Sol Aktif Çizgi */}
-                  <div className="absolute -left-4 top-1/2 -translate-y-1/2 flex items-center justify-center h-20">
-                    <div 
-                      className={`w-[3px] rounded-full transition-all duration-300 ${isSelected ? "h-20 bg-[#00e5ff] shadow-[0_0_15px_#00e5ff]" : "h-0 bg-[#00e5ff]/50 group-hover:h-12 group-hover:bg-[#00e5ff] group-hover:shadow-[0_0_10px_#00e5ff]"}`}
+
+                  {/* Sol Aktif Çizgi */}
+                  <div
+                    className="absolute -left-4 top-1/2 -translate-y-1/2 flex items-center justify-center"
+                    style={{ height: `${activeLineH}px` }}>
+                    <div
+                      className={`w-[3px] rounded-full transition-all duration-300 ${
+                        isSelected
+                          ? "bg-[#00e5ff] shadow-[0_0_15px_#00e5ff]"
+                          : "h-0 bg-[#00e5ff]/50 group-hover:bg-[#00e5ff] group-hover:shadow-[0_0_10px_#00e5ff]"
+                      }`}
+                      style={
+                        isSelected
+                          ? { height: `${activeLineH}px` }
+                          : { "--hover-h": `${hoverLineH}px` }
+                      }
                     />
                   </div>
 
-                  <div className="flex flex-col items-start mr-4 w-32 whitespace-nowrap">
+                  {/* Etiket */}
+                  <div
+                    className="flex flex-col items-start whitespace-nowrap"
+                    style={{ width: `${textW}px`, marginRight: `${textMR}px` }}>
                     <div
-                      className={`text-sm font-semibold tracking-[0.15em] transition-all duration-300 ${isSelected ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/70 group-hover:text-white"}`}>
+                      className={`font-semibold tracking-[0.15em] transition-all duration-300 ${
+                        isSelected
+                          ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]"
+                          : "text-white/70 group-hover:text-white"
+                      }`}
+                      style={{ fontSize: `${labelPx}px` }}>
                       {item.label}
                     </div>
-                    <div className={`text-[9px] font-medium tracking-[0.1em] mt-1 transition-all duration-300 ${isSelected ? "text-white/70" : "text-white/40 group-hover:text-white/60"}`}>
+                    <div
+                      className={`font-medium tracking-[0.1em] mt-1 transition-all duration-300 ${
+                        isSelected ? "text-white/70" : "text-white/40 group-hover:text-white/60"
+                      }`}
+                      style={{ fontSize: `${subPx}px` }}>
                       {item.subLabel}
                     </div>
                   </div>
 
-                  <div className="relative flex items-center justify-center translate-x-1/2 min-w-[44px] min-h-[44px]">
-                    <div className={`absolute w-[2px] h-16 bg-gradient-to-b from-transparent via-[#00e5ff] to-transparent transition-opacity duration-300 ${isSelected ? "opacity-100 shadow-[0_0_10px_#00e5ff]" : "opacity-0"}`} />
-                    <div className={`w-10 h-10 rounded-full border-[1px] transition-all duration-300 bg-[#020813] ${isSelected ? "border-[#00e5ff] bg-[#00e5ff]/10 shadow-[0_0_15px_rgba(0,229,255,0.3)] scale-110" : "border-white/20 group-hover:border-white/50 group-hover:bg-white/5 scale-90"}`} />
-                    <div className={`absolute rounded-full transition-all duration-300 ${isSelected ? "w-3 h-3 bg-white shadow-[0_0_15px_#00e5ff,0_0_30px_#00e5ff]" : "w-1.5 h-1.5 bg-white/60 group-hover:bg-white/90 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.5)]"}`} />
+                  {/* Düğüm (Node) */}
+                  <div
+                    className="relative flex items-center justify-center translate-x-1/2"
+                    style={{
+                      width: `${nodeSize}px`,
+                      height: `${nodeSize}px`,
+                      minWidth: "44px",
+                      minHeight: "44px",
+                    }}>
+                    <div
+                      className={`absolute w-[2px] bg-gradient-to-b from-transparent via-[#00e5ff] to-transparent transition-opacity duration-300 ${isSelected ? "opacity-100 shadow-[0_0_10px_#00e5ff]" : "opacity-0"}`}
+                      style={{ height: `${vertLineH}px` }}
+                    />
+                    <div
+                      className={`rounded-full border-[1px] transition-all duration-300 bg-[#020813] ${
+                        isSelected
+                          ? "border-[#00e5ff] bg-[#00e5ff]/10 shadow-[0_0_15px_rgba(0,229,255,0.3)] scale-110"
+                          : "border-white/20 group-hover:border-white/50 group-hover:bg-white/5 scale-90"
+                      }`}
+                      style={{ width: `${nodeSize}px`, height: `${nodeSize}px` }}
+                    />
+                    <div
+                      className={`absolute rounded-full transition-all duration-300 ${
+                        isSelected
+                          ? "bg-white shadow-[0_0_15px_#00e5ff,0_0_30px_#00e5ff]"
+                          : "bg-white/60 group-hover:bg-white/90 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+                      }`}
+                      style={{
+                        width: `${isSelected ? dotLg : dotSm}px`,
+                        height: `${isSelected ? dotLg : dotSm}px`,
+                      }}
+                    />
                   </div>
                 </div>
               );
@@ -211,15 +275,14 @@ export const CircularMenu = ({
 
       {/* Menü Açma/Kapama Butonu */}
       <div
-        className="absolute z-50 pointer-events-auto cursor-pointer flex flex-col justify-center items-center gap-[6px] group w-12 h-12 min-w-[44px] min-h-[44px]"
+        className="absolute z-50 pointer-events-auto cursor-pointer flex flex-col justify-center items-center gap-[6px] group min-w-[44px] min-h-[44px]"
         style={
           isMobile
             ? { right: "1rem", top: "1rem" }
             : {
-                left: `${250 * scaleMultiplier}px`,
+                left: `${250 * sm}px`,
                 top: "50%",
-                transform: `translate(-50%, -50%) scale(${scaleMultiplier})`,
-                transformOrigin: "center center",
+                transform: "translate(-50%, -50%)",
               }
         }
         onClick={() => setIsNavOpen(!isNavOpen)}>
@@ -227,7 +290,9 @@ export const CircularMenu = ({
         <div className={`w-6 h-[1px] bg-white transition-all duration-300 ${isNavOpen ? "opacity-0" : "group-hover:w-5 group-hover:bg-white"}`} />
         <div className={`w-6 h-[1px] bg-white transition-all duration-300 origin-center ${isNavOpen ? "-rotate-45 -translate-y-[7px]" : "group-hover:w-8 group-hover:bg-white"}`} />
 
-        <div className={`absolute right-full mr-2 whitespace-nowrap text-[10px] font-medium tracking-[0.3em] transition-all duration-300 ${isNavOpen ? "text-white/0 -translate-x-2" : "text-white/50 group-hover:text-white translate-x-0"}`}>
+        <div
+          className={`absolute right-full mr-2 whitespace-nowrap font-medium tracking-[0.3em] transition-all duration-300 ${isNavOpen ? "text-white/0 -translate-x-2" : "text-white/50 group-hover:text-white translate-x-0"}`}
+          style={{ fontSize: `${menuLabelPx}px` }}>
           MENÜ
         </div>
       </div>
