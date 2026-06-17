@@ -11,6 +11,7 @@ import { useConfigStore } from './store/useConfigStore';
 import { AnimatePresence, motion } from 'motion/react';
 import { BrowserRouter } from 'react-router-dom';
 import { RouteManager } from './components/RouteManager';
+import { AmbientParticles } from './components/ui/AmbientParticles';
 
 function App() {
   const selectedPart = useConfigStore((state) => state.selectedPart);
@@ -23,6 +24,7 @@ function App() {
       <LoadingScreen />
       <ConfigPanel />
       <div className="absolute inset-0 z-0 pointer-events-none">
+        <AmbientParticles />
         <AnimatePresence>
           {(selectedPart === 'subtitle3' || (selectedPart === null && activePage === null)) && (
             <motion.div
