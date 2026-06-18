@@ -112,7 +112,11 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
               <span className="text-lg">←</span> MENÜYE DÖN
             </button>
 
-            <h1 className="font-display text-3xl md:text-5xl font-light tracking-[0.25em] md:tracking-[0.35em] text-white mb-8 md:mb-12">
+            <h1 className={`font-display text-3xl md:text-5xl font-light tracking-[0.25em] md:tracking-[0.35em] text-white ${
+              activePage === "iletisim" || activePage === "model-kutuphanesi"
+                ? "sr-only"
+                : "mb-8 md:mb-12"
+            }`}>
               {PAGE_TITLES[activePage] || activePage}
             </h1>
 

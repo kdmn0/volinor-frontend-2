@@ -9,8 +9,8 @@ export default function VideoLibrary() {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        // public klasöründeki statik JSON dosyasını çekiyoruz
-        const response = await fetch('/videolar.json');
+        // Django backend'inden verileri çekiyoruz
+        const response = await fetch('http://localhost:8000/api/videos/');
         if (!response.ok) {
           throw new Error('Video verileri yüklenemedi.');
         }
@@ -80,7 +80,7 @@ export default function VideoLibrary() {
                   className="relative aspect-video w-full overflow-hidden bg-black/40 outline-none block"
                 >
                   <img 
-                    src={video.thumbnail} 
+                    src={video.thumbnail_url} 
                     alt={video.title}
                     className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                     loading="lazy"
@@ -101,7 +101,7 @@ export default function VideoLibrary() {
               <div className="p-5 flex flex-col flex-grow">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-xs font-medium px-2.5 py-1 bg-white/10 text-white/80 rounded-full">
-                    {new Date(video.publishedAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                    {new Date(video.published_at).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
                   </span>
                 </div>
                 
