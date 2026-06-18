@@ -119,6 +119,8 @@ function MainLayout() {
   );
 }
 
+import ModelDetailPage from './pages/ModelDetailPage';
+
 function App() {
   return (
     <BrowserRouter>
@@ -129,6 +131,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:uid/:token" element={<ResetPassword />} />
         <Route path="/model-kutuphanesi" element={<ModelLibraryPage />} />
+        <Route path="/model-kutuphanesi/:id" element={<ModelDetailPage />} />
         <Route path="*" element={<MainLayout />} />
       </Routes>
     </BrowserRouter>

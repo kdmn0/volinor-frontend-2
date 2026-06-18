@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { useConfigStore } from '../../store/useConfigStore';
 import './AuthPage.css';
 
 const AuthPage = () => {
     const [view, setView] = useState('login');
     const [authMessage, setAuthMessage] = useState('');
     const navigate = useNavigate();
+    const setIsLoggedIn = useConfigStore((state) => state.setIsLoggedIn);
+    const setUserEmail = useConfigStore((state) => state.setUserEmail);
 
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
@@ -30,8 +33,12 @@ const AuthPage = () => {
                     access_token: googleResponse.access_token,
                 });
                 if (res.data.access_token) localStorage.setItem('access_token', res.data.access_token);
+                setIsLoggedIn(true);
+                if (res.data.user && res.data.user.email) {
+                    setUserEmail(res.data.user.email);
+                }
                 setAuthMessage('Giriş Başarılı! Yönlendiriliyorsunuz...');
-                setTimeout(() => navigate('/'), 1500);
+                setTimeout(() => navigate('/model-kutuphanesi'), 1500);
             } catch (err) {
                 setAuthMessage(
                     err.response?.status === 403
@@ -53,8 +60,10 @@ const AuthPage = () => {
             });
             if (res.data.key) localStorage.setItem('access_token', res.data.key);
             setLoginStatus('success');
+            setIsLoggedIn(true);
+            setUserEmail(loginEmail);
             setAuthMessage('Giriş Başarılı! Yönlendiriliyorsunuz...');
-            setTimeout(() => navigate('/'), 1500);
+            setTimeout(() => navigate('/model-kutuphanesi'), 1500);
         } catch (err) {
             setLoginStatus('idle');
             setAuthMessage(parseApiError(err.response?.data, 'E-posta veya şifre hatalı.'));

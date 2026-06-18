@@ -3,206 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { useConfigStore } from "../store/useConfigStore";
 
-const MOCK_MODELS = [
-  {
-    id: "vln-drone-x1",
-    name: "VLN Drone X-1",
-    category: "AERIAL",
-    polyCount: "124,500",
-    materials: 8,
-    date: "2025.10.12",
-    image:
-      "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "FBX", size: "24 MB" },
-      { format: "GLTF", size: "18 MB" },
-      { format: "OBJ", size: "32 MB" },
-    ],
-  },
-  {
-    id: "comp-wing-v2",
-    name: "Composite Wing Panel V2",
-    category: "AEROSPACE",
-    polyCount: "86,200",
-    materials: 4,
-    date: "2025.11.04",
-    image:
-      "https://images.unsplash.com/photo-1540826456073-61b6c0033c46?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "STEP", size: "45 MB" },
-      { format: "IGES", size: "48 MB" },
-      { format: "GLTF", size: "12 MB" },
-    ],
-  },
-  {
-    id: "ai-vision-module",
-    name: "AI Vision Module",
-    category: "HARDWARE",
-    polyCount: "45,100",
-    materials: 12,
-    date: "2026.01.18",
-    image:
-      "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "FBX", size: "15 MB" },
-      { format: "GLTF", size: "9 MB" },
-    ],
-  },
-  {
-    id: "sim-terrain-alpha",
-    name: "Simulation Terrain Alpha",
-    category: "ENVIRONMENT",
-    polyCount: "1,200,000",
-    materials: 24,
-    date: "2026.03.22",
-    image:
-      "https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "FBX", size: "145 MB" },
-      { format: "OBJ", size: "180 MB" },
-    ],
-  },
-  {
-    id: "cyber-arm-v1",
-    name: "Cyber Arm V1",
-    category: "PROSTHETICS",
-    polyCount: "150,000",
-    materials: 10,
-    date: "2026.04.10",
-    image:
-      "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "FBX", size: "30 MB" },
-      { format: "OBJ", size: "45 MB" },
-    ],
-  },
-  {
-    id: "mech-suit-prototype",
-    name: "Mech Suit Prototype",
-    category: "ARMOR",
-    polyCount: "500,000",
-    materials: 15,
-    date: "2026.05.01",
-    image:
-      "https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "FBX", size: "100 MB" },
-      { format: "GLTF", size: "85 MB" },
-    ],
-  },
-  {
-    id: "holo-emitter-x",
-    name: "Holo Emitter X",
-    category: "HARDWARE",
-    polyCount: "25,000",
-    materials: 5,
-    date: "2026.05.15",
-    image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "GLTF", size: "5 MB" },
-      { format: "OBJ", size: "8 MB" },
-    ],
-  },
-  {
-    id: "quantum-core",
-    name: "Quantum Core",
-    category: "ENERGY",
-    polyCount: "80,000",
-    materials: 8,
-    date: "2026.05.20",
-    image:
-      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "STEP", size: "20 MB" },
-      { format: "FBX", size: "12 MB" },
-    ],
-  },
-  {
-    id: "neo-tokyo-building",
-    name: "Neo Tokyo Building",
-    category: "ARCHITECTURE",
-    polyCount: "2,500,000",
-    materials: 45,
-    date: "2026.05.25",
-    image:
-      "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "FBX", size: "300 MB" },
-      { format: "OBJ", size: "450 MB" },
-    ],
-  },
-  {
-    id: "plasma-rifle-mk2",
-    name: "Plasma Rifle MK2",
-    category: "WEAPON",
-    polyCount: "65,000",
-    materials: 6,
-    date: "2026.06.01",
-    image:
-      "https://images.unsplash.com/photo-1593118933355-87bd89cb1f1c?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "FBX", size: "18 MB" },
-      { format: "GLTF", size: "15 MB" },
-    ],
-  },
-  {
-    id: "hover-bike-z",
-    name: "Hover Bike Z",
-    category: "VEHICLE",
-    polyCount: "120,000",
-    materials: 12,
-    date: "2026.06.05",
-    image:
-      "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "FBX", size: "40 MB" },
-      { format: "OBJ", size: "55 MB" },
-    ],
-  },
-  {
-    id: "android-head-model",
-    name: "Android Head Model",
-    category: "CHARACTER",
-    polyCount: "200,000",
-    materials: 14,
-    date: "2026.06.10",
-    image:
-      "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "FBX", size: "60 MB" },
-      { format: "GLTF", size: "45 MB" },
-    ],
-  },
-  {
-    id: "space-station-hub",
-    name: "Space Station Hub",
-    category: "ENVIRONMENT",
-    polyCount: "3,000,000",
-    materials: 60,
-    date: "2026.06.12",
-    image:
-      "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "FBX", size: "500 MB" },
-      { format: "OBJ", size: "750 MB" },
-    ],
-  },
-  {
-    id: "nano-bot-swarm",
-    name: "Nano Bot Swarm",
-    category: "PARTICLES",
-    polyCount: "15,000",
-    materials: 2,
-    date: "2026.06.15",
-    image:
-      "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?q=80&w=800&auto=format&fit=crop",
-    downloads: [
-      { format: "GLTF", size: "3 MB" },
-      { format: "STEP", size: "5 MB" },
-    ],
-  },
-];
+import { MOCK_MODELS } from "../data/mockModels";
 
 const ArrowLeftIcon = ({ className = "" }) => (
   <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
@@ -231,8 +32,11 @@ const BoxIcon = ({ className = "" }) => (
 export const ModelLibraryPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const isLoggedIn = useConfigStore((state) => state.isLoggedIn);
   const setIsLoggedIn = useConfigStore((state) => state.setIsLoggedIn);
+  const userEmail = useConfigStore((state) => state.userEmail);
+  const setUserEmail = useConfigStore((state) => state.setUserEmail);
 
   const filteredModels = MOCK_MODELS.filter(
     (model) =>
@@ -241,12 +45,40 @@ export const ModelLibraryPage = () => {
   );
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
     setIsUserMenuOpen(false);
+    setIsLoggingOut(true);
+    setTimeout(() => {
+      setIsLoggedIn(false);
+      setUserEmail("");
+      localStorage.removeItem("access_token");
+      setIsLoggingOut(false);
+    }, 1500);
   };
 
   return (
     <div className="h-screen overflow-y-auto overflow-x-hidden bg-zinc-950 text-zinc-100 font-sans selection:bg-cyan-500/30 selection:text-cyan-200 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-950">
+      {/* LOGOUT OVERLAY */}
+      <AnimatePresence>
+        {isLoggingOut && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-zinc-950/80 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="flex flex-col items-center gap-4 bg-zinc-900 border border-zinc-800 p-8 rounded-2xl shadow-2xl"
+            >
+              <div className="w-12 h-12 border-4 border-zinc-800 border-t-cyan-500 rounded-full animate-spin"></div>
+              <p className="text-zinc-200 font-medium tracking-wide">Çıkış yapılıyor...</p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* BACKGROUND EFFECTS */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-900/10 rounded-full blur-[120px]" />
@@ -265,8 +97,8 @@ export const ModelLibraryPage = () => {
               <ArrowLeftIcon className="group-hover:-translate-x-1 transition-transform" />
               MAIN SYSTEM
             </Link>
-            <div className="w-px h-6 bg-zinc-800" />
-            <h1 className="text-xl font-semibold tracking-widest bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent">
+            {/* SEO için gizli başlık */}
+            <h1 className="sr-only">
               ASSET ARCHIVE
             </h1>
           </div>
@@ -295,30 +127,32 @@ export const ModelLibraryPage = () => {
             ) : (
               <div className="relative">
                 <button
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 hover:border-cyan-500/50 hover:bg-zinc-800 transition-colors text-zinc-300"
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 hover:border-cyan-500/50 transition-all overflow-hidden"
                 >
-                  <UserIcon />
+                  <UserIcon className="w-5 h-5 text-zinc-400 hover:text-cyan-400" />
                 </button>
 
                 <AnimatePresence>
                   {isUserMenuOpen && (
                     <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute right-0 mt-3 w-48 bg-zinc-900 border border-zinc-800 rounded-lg shadow-2xl overflow-hidden z-50 backdrop-blur-xl"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute right-0 mt-2 w-56 bg-zinc-900/95 backdrop-blur border border-zinc-800 rounded-lg shadow-xl overflow-hidden z-50"
                     >
-                      <div className="p-2 border-b border-zinc-800/50">
-                        <p className="text-xs text-zinc-500 uppercase tracking-widest px-2 py-1">System User</p>
+                      <div className="px-4 py-3 border-b border-zinc-800/50">
+                        <p className="text-xs text-zinc-500 mb-1">Giriş yapıldı</p>
+                        <p className="text-sm font-medium text-zinc-200 truncate" title={userEmail}>
+                          {userEmail || 'Kullanıcı'}
+                        </p>
                       </div>
-                      <div className="p-1">
+                      <div className="p-2">
                         <button
-                          className="w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 rounded transition-colors tracking-wide"
                           onClick={handleLogout}
+                          className="w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-red-400/10 rounded transition-colors"
                         >
-                          ÇIKIŞ YAP
+                          Çıkış Yap
                         </button>
                       </div>
                     </motion.div>
@@ -359,7 +193,8 @@ export const ModelLibraryPage = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {filteredModels.map((model) => (
-              <div
+              <Link
+                to={`/model-kutuphanesi/${model.id}`}
                 key={model.id}
                 className="group flex flex-col bg-zinc-900/40 backdrop-blur-md border border-zinc-800/60 rounded-2xl overflow-hidden hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.05)] transition-all duration-300"
               >
@@ -372,14 +207,6 @@ export const ModelLibraryPage = () => {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/20 to-transparent opacity-80" />
-                  
-                  {/* CATEGORY BADGE */}
-                  <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 bg-zinc-900/80 backdrop-blur-md border border-zinc-700/50 rounded-full">
-                    <LayersIcon className="w-3 h-3 text-cyan-400" />
-                    <span className="text-[10px] font-bold tracking-wider text-zinc-300 uppercase">
-                      {model.category}
-                    </span>
-                  </div>
                 </div>
 
                 {/* CONTENT */}
@@ -387,34 +214,8 @@ export const ModelLibraryPage = () => {
                   <h3 className="text-lg font-bold tracking-wide text-zinc-100 group-hover:text-cyan-50 transition-colors line-clamp-1">
                     {model.name}
                   </h3>
-                  
-                  <div className="flex items-center gap-4 mt-3 text-xs text-zinc-500 font-mono tracking-wider">
-                    <div className="flex items-center gap-1.5">
-                      <BoxIcon className="w-3.5 h-3.5" />
-                      {model.polyCount}
-                    </div>
-                    <div className="w-1 h-1 rounded-full bg-zinc-700" />
-                    <div className="flex items-center gap-1.5">
-                      <LayersIcon className="w-3.5 h-3.5" />
-                      {model.materials}
-                    </div>
-                  </div>
-
-                  {/* DOWNLOAD BUTTONS */}
-                  <div className="mt-5 pt-4 border-t border-zinc-800/60 flex flex-wrap gap-2">
-                    {model.downloads.map((dl) => (
-                      <button
-                        key={dl.format}
-                        className="flex-1 min-w-[70px] flex flex-col items-center justify-center gap-1 py-2 px-2 bg-zinc-950 hover:bg-cyan-500/10 border border-zinc-800 hover:border-cyan-500/40 rounded-lg transition-all text-zinc-400 hover:text-cyan-300"
-                        title={`${dl.format} İndir (${dl.size})`}
-                      >
-                        <DownloadIcon className="w-4 h-4 mb-0.5" />
-                        <span className="text-[10px] font-bold tracking-widest">{dl.format}</span>
-                      </button>
-                    ))}
-                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}
