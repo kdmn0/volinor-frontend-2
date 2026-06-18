@@ -18,6 +18,15 @@ const References = [
   { id: 7, name: "LenoWorks", logo: "/logo/lenoworks.png" },
 ];
 
+const Certificates = [
+  {
+    id: 1,
+    name: "ISO 9001:2015",
+    image: "/certificates/certificate1.png", // Buraya resim dosyasının yolu gelecek
+    pdf: "/certificates/certificate1.pdf", // Buraya pdf dosyasının yolu gelecek
+  },
+];
+
 const PAGE_TITLES = {
   hakkimizda: "HAKKIMIZDA",
   urunlerimiz: "ÜRÜNLERİMİZ",
@@ -73,7 +82,10 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
     }
   };
 
-  const isWidePage = activePage === "referanslar" || activePage === "video-kutuphanesi";
+  const isWidePage =
+    activePage === "referanslar" ||
+    activePage === "video-kutuphanesi" ||
+    activePage === "sertifika-ve-patentler";
 
   return (
     <AnimatePresence>
@@ -191,6 +203,47 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                       </button>
                     </form>
                   </div>
+                </div>
+              )}
+              {activePage === "sertifika-ve-patentler" && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10 mt-8">
+                  {Certificates.map((cert, index) => (
+                    <motion.div
+                      key={cert.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex flex-col items-center bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 hover:border-[#00e5ff]/30 transition-all group cursor-pointer"
+                      onClick={() =>
+                        window.open(cert.pdf || cert.image, "_blank")
+                      }>
+                      <div className="w-full aspect-[1/1.4] relative mb-5 overflow-hidden rounded-lg bg-black/40 flex items-center justify-center p-2">
+                        <img
+                          src={cert.image}
+                          alt={cert.name}
+                          className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-lg"
+                        />
+                      </div>
+                      <h3 className="font-display tracking-[0.1em] text-white/90 group-hover:text-white text-center text-sm md:text-base font-semibold">
+                        {cert.name}
+                      </h3>
+                      <span className="flex items-center gap-2 text-xs text-[#00e5ff]/70 mt-3 tracking-widest group-hover:text-[#00e5ff] transition-colors font-medium">
+                        <span>DETAYLI GÖRÜNTÜLE</span>
+                        <svg
+                          className="w-3 h-3"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                      </span>
+                    </motion.div>
+                  ))}
                 </div>
               )}
               {activePage === "referanslar" && (
