@@ -137,6 +137,13 @@ function App() {
 
   return (
     <BrowserRouter>
+      <div style={{
+        position: 'fixed', inset: 0, zIndex: -1,
+        backgroundImage: 'url(/background.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }} />
       <RouteManager />
       <Routes>
         <Route path="/auth" element={<AuthPage />} />
