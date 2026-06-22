@@ -13,8 +13,10 @@ import { CircularMenu } from "./CircularMenu";
 import { PageModal } from "../modals/PageModal";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AnalysisOverlay } from "../feedback/AnalysisOverlay";
+import { useTranslation } from "react-i18next";
 
 export const ConfigPanel = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [isNavOpen, setIsNavOpen] = useState(() => {
@@ -55,25 +57,10 @@ export const ConfigPanel = () => {
   const menuItems = useMemo(() => {
     return selectedModel === "bee"
       ? [
-          {
-            id: "subtitle1",
-            url: "/modelleme",
-            label: "MODELLEME",
-            subLabel: "3D MODEL & TASARIM",
-          },
-          { id: "subtitle2", url: "/simulasyon", label: "SİMÜLASYON", subLabel: "SENARYO & TEST" },
-          {
-            id: "subtitle3",
-            url: "/ileri-malzeme",
-            label: "İLERİ MALZEME",
-            subLabel: "KOMPOZİT & ANALİZ",
-          },
-          {
-            id: "subtitle4",
-            url: "/yapay-zeka",
-            label: "YAPAY ZEKA",
-            subLabel: "ALGORİTMA & OTONOMİ",
-          },
+          { id: "subtitle1", url: "/modelleme", label: t("menu.modeling"), subLabel: t("menu.modeling_sub") },
+          { id: "subtitle2", url: "/simulasyon", label: t("menu.simulation"), subLabel: t("menu.simulation_sub") },
+          { id: "subtitle3", url: "/ileri-malzeme", label: t("menu.advanced_materials"), subLabel: t("menu.advanced_materials_sub") },
+          { id: "subtitle4", url: "/yapay-zeka", label: t("menu.ai"), subLabel: t("menu.ai_sub") },
         ]
       : [
           { id: "subtitle5", url: "/", label: "5", subLabel: "" },
@@ -81,7 +68,7 @@ export const ConfigPanel = () => {
           { id: "subtitle7", url: "/", label: "7", subLabel: "" },
           { id: "subtitle8", url: "/", label: "8", subLabel: "" },
         ];
-  }, [selectedModel]);
+  }, [selectedModel, t]);
 
   return (
     <AnimatePresence>
@@ -124,10 +111,10 @@ export const ConfigPanel = () => {
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
                 className="absolute bottom-6 left-4 right-4 md:top-1/2 md:bottom-auto md:right-24 md:left-auto md:-translate-y-1/2 md:w-80 bg-[#070d1a]/80 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 pointer-events-auto z-20">
                 <h2 className="font-display text-xl md:text-2xl font-semibold text-white mb-2 tracking-[0.2em] uppercase">
-                  {partData.name}
+                  {t(partData.nameKey)}
                 </h2>
                 <p className="text-gray-400 text-base mb-2 md:mb-4 max-h-32 md:max-h-none overflow-y-auto md:overflow-visible pr-1">
-                  {partData.description}
+                  {t(partData.descKey)}
                 </p>
 
                 {selectedPart === "subtitle1" && (
@@ -157,7 +144,7 @@ export const ConfigPanel = () => {
                         </>
                       )}
                     </svg>
-                    {isAnalysisMode ? "STANDART GÖRÜNÜME DÖN" : "YAPISAL ANALİZİ BAŞLAT"}
+                    {isAnalysisMode ? t("menu.analysis_stop") : t("menu.analysis_start")}
                   </button>
                 )}
               </motion.div>

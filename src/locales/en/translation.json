@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "about": "ABOUT US",
+    "products": "OUR PRODUCTS",
+    "modelLibrary": "MODEL LIBRARY",
+    "videoLibrary": "VIDEO LIBRARY",
+    "references": "REFERENCES",
+    "certificates": "CERTIFICATES & PATENTS",
+    "contact": "CONTACT"
+  },
+  "menu": {
+    "modeling": "MODELING",
+    "modeling_sub": "3D MODEL & DESIGN",
+    "simulation": "SIMULATION",
+    "simulation_sub": "SCENARIO & TEST",
+    "advanced_materials": "ADV. MATERIALS",
+    "advanced_materials_sub": "COMPOSITE & ANALYSIS",
+    "ai": "AI SYSTEMS",
+    "ai_sub": "ALGORITHM & AUTONOMY",
+    "analysis_start": "INITIATE STRUCTURAL ANALYSIS",
+    "analysis_stop": "RETURN TO STANDARD VIEW"
+  },
+  "parts": {
+    "modeling": {
+      "name": "MODELING",
+      "desc": "We provide high-precision 3D modeling and design services for defense and aerospace projects. Through CAD-based processes, we develop original and applicable solutions at every stage — from conceptual design to production-ready engineering models."
+    },
+    "simulation": {
+      "name": "SIMULATION",
+      "desc": "We test design performance before production through scenario-based simulations that reflect real operational conditions. This enables early identification of risks, accelerated development cycles, and optimized cost efficiency."
+    },
+    "advanced_materials": {
+      "name": "ADVANCED MATERIALS",
+      "desc": "We conduct R&D and analysis on advanced composite materials suited to the rigorous demands of the defense industry. We add value to projects with material solutions that optimize the balance of weight, durability, and performance."
+    },
+    "ai": {
+      "name": "ARTIFICIAL INTELLIGENCE",
+      "desc": "We develop AI-based algorithms for autonomous systems and intelligent platforms. In areas such as image processing, decision support, and autonomous control, we produce innovative solutions that shape the future of the defense industry."
+    }
+  }
+}

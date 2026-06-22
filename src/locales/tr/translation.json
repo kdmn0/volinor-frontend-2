@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "about": "HAKKIMIZDA",
+    "products": "ÜRÜNLERİMİZ",
+    "modelLibrary": "MODEL KÜTÜPHANESİ",
+    "videoLibrary": "VİDEO KÜTÜPHANESİ",
+    "references": "REFERANSLAR",
+    "certificates": "SERTİFİKA VE PATENTLER",
+    "contact": "İLETİŞİM"
+  },
+  "menu": {
+    "modeling": "MODELLEME",
+    "modeling_sub": "3D MODEL & TASARIM",
+    "simulation": "SİMÜLASYON",
+    "simulation_sub": "SENARYO & TEST",
+    "advanced_materials": "İLERİ MALZEME",
+    "advanced_materials_sub": "KOMPOZİT & ANALİZ",
+    "ai": "YAPAY ZEKA",
+    "ai_sub": "ALGORİTMA & OTONOMİ",
+    "analysis_start": "YAPISAL ANALİZİ BAŞLAT",
+    "analysis_stop": "STANDART GÖRÜNÜME DÖN"
+  },
+  "parts": {
+    "modeling": {
+      "name": "MODELLEME",
+      "desc": "Savunma ve havacılık projeleri için yüksek hassasiyetli 3D modelleme ve tasarım hizmetleri sunuyoruz. CAD tabanlı süreçlerle, kavramsal tasarımdan üretime hazır mühendislik modellerine kadar her aşamada özgün ve uygulanabilir çözümler geliştiriyoruz."
+    },
+    "simulation": {
+      "name": "SİMÜLASYON",
+      "desc": "Gerçek operasyon koşullarını yansıtan senaryo tabanlı simülasyonlarla, tasarımların performansını üretim öncesinde test ediyoruz. Bu sayede riskler erken aşamada tespit edilir, geliştirme süreçleri hızlanır ve maliyet verimliliği sağlanır."
+    },
+    "advanced_materials": {
+      "name": "İLERİ MALZEME",
+      "desc": "Savunma sanayinin zorlu gereksinimlerine uygun ileri kompozit malzemeler üzerinde Ar-Ge ve analiz çalışmaları yürütüyoruz. Hafiflik, dayanıklılık ve performans dengesini optimize eden malzeme çözümleriyle projelere katma değer sağlıyoruz."
+    },
+    "ai": {
+      "name": "YAPAY ZEKA",
+      "desc": "Otonom sistemler ve akıllı platformlar için yapay zeka tabanlı algoritmalar geliştiriyoruz. Görüntü işleme, karar destek ve otonom kontrol gibi alanlarda, savunma sanayinin geleceğine yön veren yenilikçi çözümler üretiyoruz."
+    }
+  }
+}

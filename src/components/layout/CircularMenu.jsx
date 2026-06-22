@@ -231,10 +231,10 @@ export const CircularMenu = ({
 
                   {/* Etiket */}
                   <div
-                    className="flex flex-col items-start whitespace-nowrap"
+                    className="flex flex-col items-start"
                     style={{ width: `${textW}px`, marginRight: `${textMR}px` }}>
                     <div
-                      className={`font-display font-semibold tracking-[0.2em] transition-all duration-300 ${
+                      className={`font-display font-semibold tracking-[0.2em] transition-all duration-300 whitespace-nowrap ${
                         isSelected
                           ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]"
                           : "text-white/70 group-hover:text-white"

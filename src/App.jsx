@@ -18,6 +18,7 @@ import ResetPassword from './pages/auth/ResetPassword';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ModelLibraryPage from './pages/ModelLibraryPage';
 import { AmbientParticles } from './components/effects/AmbientParticles';
+import { LanguageToggle } from './components/LanguageToggle';
 
 function MainLayout() {
   const selectedPart = useConfigStore((state) => state.selectedPart);
@@ -146,6 +147,7 @@ function App() {
         backgroundRepeat: 'no-repeat',
       }} />
       <RouteManager />
+      <LanguageToggle />
       <Routes>
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/verify-email/:key" element={<VerifyEmail />} />
