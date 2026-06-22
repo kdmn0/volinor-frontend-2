@@ -53,7 +53,15 @@ export const CircularMenu = ({
     viewport.width / BASE_WIDTH,
     viewport.height / BASE_HEIGHT,
   );
-  const sm = clamp(rawScale, MIN_SCALE, MAX_SCALE);
+
+  // 16:10 ekran algılaması (Örn: 2560x1600 veya 1440x900 -> oran 1.6)
+  const aspectRatio = viewport.width / viewport.height;
+  const is16by10 = aspectRatio >= 1.55 && aspectRatio <= 1.65;
+  
+  // 16:10 ekranlar için ölçeği %15 artır
+  const scaleMultiplier = is16by10 ? 1.15 : 1.0;
+
+  const sm = clamp(rawScale * scaleMultiplier, MIN_SCALE, MAX_SCALE * scaleMultiplier);
 
   const startAngle = -25;
   const endAngle = 25;
@@ -75,7 +83,7 @@ export const CircularMenu = ({
   const textMR      = Math.max(12,  Math.round(16  * sm));
   const labelPx     = Math.max(13,  Math.round(16  * fontSm));
   const subPx       = Math.max(10,  Math.round(12  * fontSm));
-  const menuLabelPx = Math.max(10,  Math.round(12  * fontSm));
+  const menuLabelPx = Math.max(14,  Math.round(16  * fontSm));
   const activeLineH = Math.max(60,  Math.round(80  * sm));
   const hoverLineH  = Math.max(36,  Math.round(48  * sm));
   const vertLineH   = Math.max(48,  Math.round(64  * sm));
