@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoLibrary from "../../pages/VideoLibrary";
+import ProductsSlider from "./ProductsSlider";
 
 const References = [
   { id: 1, name: "Kara Kuvvetleri Komutanlığı", logo: "/logo/kara.png" },
@@ -121,6 +122,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
   };
 
   const isWidePage =
+    activePage === "urunlerimiz" ||
     activePage === "referanslar" ||
     activePage === "video-kutuphanesi" ||
     activePage === "sertifika-ve-patentler" ||
@@ -183,6 +185,11 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                     <li>Eğitim simülatörleri ve simülasyon yazılımları,</li>
                     <li>Digital Twin uygulamaları alanlarında hizmet sunar</li>
                   </ul>
+                </div>
+              )}
+              {activePage === "urunlerimiz" && (
+                <div className="w-full mt-4 md:mt-6">
+                  <ProductsSlider />
                 </div>
               )}
               {activePage === "iletisim" && (

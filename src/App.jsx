@@ -121,6 +121,7 @@ function MainLayout() {
 }
 
 import ModelDetailPage from './pages/ModelDetailPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 function App() {
   const setIsLoggedIn = useConfigStore((s) => s.setIsLoggedIn);
@@ -152,6 +153,7 @@ function App() {
         <Route path="/reset-password/:uid/:token" element={<ResetPassword />} />
         <Route path="/model-kutuphanesi" element={<ModelLibraryPage />} />
         <Route path="/model-kutuphanesi/:id" element={<ModelDetailPage />} />
+        <Route path="/urunler/:slug" element={<ProductDetailPage />} />
         <Route path="*" element={<MainLayout />} />
       </Routes>
     </BrowserRouter>
