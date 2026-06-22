@@ -8,7 +8,6 @@ export const LanguageToggle = () => {
     const next = current === 'tr' ? 'en' : 'tr';
     localStorage.setItem('volinor_lang', next);
     i18n.changeLanguage(next);
-    window.location.reload();
   };
 
   return (
