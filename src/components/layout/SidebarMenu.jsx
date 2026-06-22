@@ -36,7 +36,7 @@ export const SidebarMenu = ({ isNavOpen, activePage, setActivePage }) => {
                 <Link
                   to={item.url}
                   onClick={() => setActivePage && setActivePage(item.id)}
-                  className={`font-display text-sm md:text-xs tracking-[0.2em] md:tracking-[0.25em] font-semibold transition-all duration-300 relative group w-full whitespace-nowrap min-h-[44px] flex items-center ${isActive ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/50 hover:text-white"}`}>
+                  className={`font-display text-base md:text-sm tracking-[0.2em] md:tracking-[0.25em] font-semibold transition-all duration-300 relative group w-full whitespace-nowrap min-h-[44px] flex items-center ${isActive ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/50 hover:text-white"}`}>
                   <div
                     className={`absolute -left-6 top-1/2 -translate-y-1/2 w-[2px] transition-all duration-300 rounded-full ${isActive ? "h-8 bg-[#00e5ff] shadow-[0_0_15px_#00e5ff]" : "h-0 bg-[#00e5ff]/50 group-hover:h-6 group-hover:bg-[#00e5ff] group-hover:shadow-[0_0_10px_#00e5ff]"}`}
                   />
