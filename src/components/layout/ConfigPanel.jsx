@@ -147,6 +147,21 @@ export const ConfigPanel = () => {
                     {isAnalysisMode ? t("menu.analysis_stop") : t("menu.analysis_start")}
                   </button>
                 )}
+
+                {selectedPart === "subtitle4" && (
+                  <a
+                    href="https://ozviai.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full mt-2 flex items-center justify-center gap-3 px-4 py-3 rounded-lg border transition-all duration-300 pointer-events-auto font-display font-semibold tracking-[0.18em] text-xs min-h-[44px] border-amber-400/35 text-amber-300/90 bg-amber-400/5 hover:border-amber-400/60 hover:text-amber-200 hover:bg-amber-400/8 hover:shadow-[0_0_16px_rgba(251,191,36,0.1)] text-center">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 opacity-75">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    {t("menu.try_ozvia")}
+                  </a>
+                )}
               </motion.div>
             )}
           </AnimatePresence>

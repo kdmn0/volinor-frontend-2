@@ -15,6 +15,7 @@ import ModelDetailPage from './pages/ModelDetailPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import { AmbientParticles } from './components/effects/AmbientParticles';
 import { LanguageToggle } from './components/LanguageToggle';
+import { AudioToggle } from './components/AudioToggle';
 
 const HIDE_3D_PATHS = ['/auth', '/verify-email', '/forgot-password', '/reset-password', '/model-kutuphanesi', '/urunler/'];
 
@@ -124,6 +125,7 @@ function AppShell() {
     <>
       <RouteManager />
       <LanguageToggle />
+      <AudioToggle />
 
       <div className={hide3D ? 'hidden' : undefined}>
         <MainLayout />

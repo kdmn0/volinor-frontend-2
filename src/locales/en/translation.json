@@ -18,7 +18,8 @@
     "ai": "AI SYSTEMS",
     "ai_sub": "ALGORITHM & AUTONOMY",
     "analysis_start": "INITIATE STRUCTURAL ANALYSIS",
-    "analysis_stop": "RETURN TO STANDARD VIEW"
+    "analysis_stop": "RETURN TO STANDARD VIEW",
+    "try_ozvia": "Try Ozvia"
   },
   "parts": {
     "modeling": {
@@ -35,7 +36,7 @@
     },
     "ai": {
       "name": "ARTIFICIAL INTELLIGENCE",
-      "desc": "We develop AI-based algorithms for autonomous systems and intelligent platforms. In areas such as image processing, decision support, and autonomous control, we produce innovative solutions that shape the future of the defense industry."
+      "desc": "We develop AI-based algorithms for autonomous systems and intelligent platforms. In areas such as image processing, decision support, and autonomous control, we produce innovative solutions. We provide support with Ozvia, our AI assistant developed for modern businesses and institutions."
     }
   },
   "pages": {

@@ -18,7 +18,8 @@
     "ai": "YAPAY ZEKA",
     "ai_sub": "ALGORİTMA & OTONOMİ",
     "analysis_start": "YAPISAL ANALİZİ BAŞLAT",
-    "analysis_stop": "STANDART GÖRÜNÜME DÖN"
+    "analysis_stop": "STANDART GÖRÜNÜME DÖN",
+    "try_ozvia": "Ozvia'yı Dene"
   },
   "parts": {
     "modeling": {
@@ -35,7 +36,7 @@
     },
     "ai": {
       "name": "YAPAY ZEKA",
-      "desc": "Otonom sistemler ve akıllı platformlar için yapay zeka tabanlı algoritmalar geliştiriyoruz. Görüntü işleme, karar destek ve otonom kontrol gibi alanlarda, savunma sanayinin geleceğine yön veren yenilikçi çözümler üretiyoruz."
+      "desc": "Otonom sistemler ve akıllı platformlar için yapay zeka tabanlı algoritmalar geliştiriyoruz. Görüntü işleme, karar destek ve otonom kontrol gibi alanlarda yenilikçi çözümler üretiyoruz. Modern işletme ve kurumlar için geliştirdiğimiz YZ asistanı Ozvia ile destek sağlıyoruz."
     }
   },
   "pages": {
