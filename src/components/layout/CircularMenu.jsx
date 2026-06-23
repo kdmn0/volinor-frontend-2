@@ -54,6 +54,8 @@ export const CircularMenu = ({
     viewport.height / BASE_HEIGHT,
   );
 
+  const aspectRatio = viewport.width / viewport.height;
+
   // Tarayıcı barları (adres çubuğu, görev çubuğu) viewport oranını değiştirdiği için 
   // fiziksel ekran oranını da (window.screen) kontrol ediyoruz.
   const screenRatio = (typeof window !== 'undefined' && window.screen) ? window.screen.width / window.screen.height : aspectRatio;
