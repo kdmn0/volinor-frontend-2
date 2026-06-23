@@ -54,14 +54,18 @@ export const CircularMenu = ({
     viewport.height / BASE_HEIGHT,
   );
 
-  // 16:10 ekran algılaması (Örn: 2560x1600 veya 1440x900 -> oran 1.6)
-  const aspectRatio = viewport.width / viewport.height;
-  const is16by10 = aspectRatio >= 1.55 && aspectRatio <= 1.65;
+  // Tarayıcı barları (adres çubuğu, görev çubuğu) viewport oranını değiştirdiği için 
+  // fiziksel ekran oranını da (window.screen) kontrol ediyoruz.
+  const screenRatio = window.screen ? window.screen.width / window.screen.height : aspectRatio;
+  const is16by10 = (aspectRatio >= 1.55 && aspectRatio <= 1.65) || (screenRatio >= 1.55 && screenRatio <= 1.65);
   
-  // 16:10 ekranlar için ölçeği %25 artır
-  const scaleMultiplier = is16by10 ? 1.25 : 1.0;
+  // 16:10 ekranlar için ölçeği büyütüyoruz
+  const scaleMultiplier = is16by10 ? 1.35 : 1.0;
 
-  const sm = clamp(rawScale * scaleMultiplier, MIN_SCALE, MAX_SCALE * scaleMultiplier);
+  // Ekran küçük olsa bile 16:10'da menünün daha büyük kalabilmesi için alt sınırı (MIN_SCALE) da esnetiyoruz.
+  const currentMinScale = is16by10 ? MIN_SCALE * 1.15 : MIN_SCALE;
+
+  const sm = clamp(rawScale * scaleMultiplier, currentMinScale, MAX_SCALE * scaleMultiplier);
 
   const startAngle = -25;
   const endAngle = 25;
