@@ -39,19 +39,19 @@ export const Experience = () => {
           preset="city"
           resolution={2}
           blur={1}
-          environmentIntensity={0.6}
+          environmentIntensity={0.8}
         />
 
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={1.0} />
         <directionalLight
           position={[5, 10, 5]}
-          intensity={1.5}
+          intensity={2.5}
           castShadow
           shadow-mapSize={512}
         />
         <spotLight
           position={[-5, 5, -5]}
-          intensity={2}
+          intensity={3.5}
           color="#ffffff"
           penumbra={1}
           distance={20}
