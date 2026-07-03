@@ -33,7 +33,8 @@ createRoot(document.getElementById("root")).render(
 );
 
 // Backend'in çalışıp çalışmadığını kontrol edip tarayıcı konsoluna yazdıralım
-fetch("http://localhost:8000/api/health/")
+const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+fetch(`${backendUrl}/api/health/`)
   .then(() => {
     console.log(
       "%c🚀 BACKEND AKTİF! Tüm sistemler hazır.",
