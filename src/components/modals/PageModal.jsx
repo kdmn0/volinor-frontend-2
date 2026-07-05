@@ -310,7 +310,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                     <p className="leading-relaxed text-sm md:text-base">
                       info@volinor.com
                       <br />
-                      +90 555 123 4567
+                      0533 654 7937
                       <br />
                       Mustafa Kemal Mah. Dumlupınar Bul. No:280 G İç Kapı
                       No:1260, Çankaya / Ankara
