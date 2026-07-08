@@ -109,6 +109,38 @@ function MainLayout() {
             </motion.div>
           )}
         </AnimatePresence>
+        <AnimatePresence>
+          {selectedPart === 'subtitle4' && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2 }}
+              className="absolute inset-0 z-[-1]"
+            >
+              <img
+                src="/background2.png"
+                alt=""
+                className="w-full h-full object-cover"
+                style={{ transform: "scale(0.85)", transformOrigin: "center 60%" }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(ellipse 62% 58% at center, transparent 22%, rgba(28,28,30,0.7) 48%, rgba(28,28,30,0.9) 66%, #1c1c1e 84%)",
+                }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, #1c1c1e 0%, transparent 22%, transparent 78%, #1c1c1e 100%), linear-gradient(to right, #1c1c1e 0%, transparent 20%, transparent 80%, #1c1c1e 100%)",
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
         <div className="pointer-events-auto w-full h-full">
           <Experience />
         </div>

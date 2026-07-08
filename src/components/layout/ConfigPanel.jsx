@@ -15,6 +15,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { AnalysisOverlay } from "../feedback/AnalysisOverlay";
 import { useTranslation } from "react-i18next";
 import { SimulationOverlay } from "./SimulationOverlay";
+import { AIOverlay } from "./AIOverlay";
 
 export const ConfigPanel = () => {
   const { t } = useTranslation();
@@ -67,7 +68,7 @@ export const ConfigPanel = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="absolute inset-0 pointer-events-none z-10">
           {/* Dairesel Seçim Menüsü */}
-          {selectedPart !== "subtitle2" && (
+          {selectedPart !== "subtitle2" && selectedPart !== "subtitle4" && (
             <CircularMenu
               isNavOpen={isNavOpen}
               setIsNavOpen={(val) => {
@@ -92,7 +93,7 @@ export const ConfigPanel = () => {
 
           {/* Sağ Seçili Eleman Bilgi Paneli */}
           <AnimatePresence>
-            {selectedPart && partData && selectedPart !== "subtitle2" && (
+            {selectedPart && partData && selectedPart !== "subtitle2" && selectedPart !== "subtitle4" && (
               <motion.div
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -145,6 +146,17 @@ export const ConfigPanel = () => {
           <AnimatePresence>
             {selectedPart === "subtitle2" && (
               <SimulationOverlay onClose={() => {
+                setSelectedPart(null);
+                setActivePage(null);
+                navigate("/");
+              }} />
+            )}
+          </AnimatePresence>
+
+          {/* Yapay Zeka Özel Arayüzü */}
+          <AnimatePresence>
+            {selectedPart === "subtitle4" && (
+              <AIOverlay onClose={() => {
                 setSelectedPart(null);
                 setActivePage(null);
                 navigate("/");

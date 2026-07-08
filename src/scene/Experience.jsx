@@ -101,18 +101,14 @@ export const Experience = () => {
           enablePan={false}
           enableZoom={true}
           minDistance={1}
-          maxDistance={4}
+          maxDistance={20}
           maxPolarAngle={Math.PI}
           autoRotate={selectedPart !== "subtitle2"}
           autoRotateSpeed={1}
         />
         {selectedModel === "bee" && <BeeController controlsRef={controlsRef} />}
         
-        {selectedPart === "subtitle4" && (
-          <SimulationObstacles showHUD={true} />
-        )}
-        
-        <WindParticles count={150} />
+        {selectedPart !== "subtitle4" && <WindParticles count={150} />}
       </Suspense>
     </Canvas>
   );

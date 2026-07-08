@@ -54,17 +54,17 @@ export const BeeController = ({ controlsRef }) => {
       gsap.killTweensOf(camera.position);
       gsap.killTweensOf(controlsRef.current.target);
       gsap.to(camera.position, {
-        x: 0,
-        y: 0.8,
-        z: -4.5, // Daha uzaktan bakış
+        x: -5.3,
+        y: 1.2,
+        z: 5.3, // Kamera mesafesini 12'den 7.5 civarına düşürerek arıyı ideal boyuta getirdik
         duration: 1.6,
         ease: "power2.inOut",
         onUpdate: () => controlsRef.current?.update(),
       });
       gsap.to(controlsRef.current.target, {
-        x: 0,
-        y: -0.5, // Merkezin altına bakarak modeli ekranın yukarısına taşıyor
-        z: 0,
+        x: 1.5, // Kameranın hedefini sağa çekerek modeli ekranda sola kaydırır
+        y: -2.5, // Kameranın hedefini daha da aşağı çekerek modeli daha yukarı aldık
+        z: 1.5,
         duration: 1.6,
         ease: "power2.inOut",
         onUpdate: () => controlsRef.current?.update(),
