@@ -160,6 +160,41 @@ export const ConfigPanel = () => {
               )}
           </AnimatePresence>
 
+          {/* Modelleme ve İleri Malzeme için ANASAYFA Butonu */}
+          <AnimatePresence>
+            {(selectedPart === "subtitle1" || selectedPart === "subtitle3") && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3 }}
+                className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-auto z-40">
+                <button
+                  onClick={() => {
+                    setSelectedPart(null);
+                    setActivePage(null);
+                    navigate("/");
+                  }}
+                  className="flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 font-display font-semibold tracking-widest text-xs border-white/20 text-white/80 bg-black/40 backdrop-blur-md hover:bg-white/10 hover:text-white hover:border-white/40">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="shrink-0">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                  </svg>
+                  {t("simulation.home_btn")}
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {/* Simülasyon Özel Arayüzü */}
           <AnimatePresence>
             {selectedPart === "subtitle2" && (
@@ -192,7 +227,7 @@ export const ConfigPanel = () => {
               {/* Ozvia Logo - sadece Yapay Zeka ekranında */}
               <AnimatePresence>
                 {selectedPart === "subtitle4" && (
-                  <div className="flex flex-col items-center relative -mt-6">
+                  <div className="flex flex-col items-center relative -mt-6 mr-6">
                     <a
                       href="https://ozviai.com/"
                       target="_blank"
@@ -207,7 +242,7 @@ export const ConfigPanel = () => {
                         className="h-8 md:h-12 w-auto shrink-0 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] cursor-pointer hover:opacity-80 transition-opacity"
                       />
                     </a>
-                    <div className="w-32 md:w-48 absolute top-full mt-2 pointer-events-none">
+                    <div className="w-full absolute top-full mt-2 pointer-events-none">
                       <CurvedLoop
                         marqueeText={t("model_labels.ozvia_ai_powered")}
                         speed={3}

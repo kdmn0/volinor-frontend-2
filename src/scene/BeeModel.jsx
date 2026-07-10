@@ -315,7 +315,6 @@ export function BeeModel(props) {
   return (
     <>
       <group ref={groupRef} {...props}>
-        <axesHelper args={[5]} />
         <primitive object={scene} />
       </group>
       <PartLabels explodeData={explodeData} selectedPart={selectedPart} />
