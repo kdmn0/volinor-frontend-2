@@ -132,7 +132,6 @@ export const ConfigPanel = () => {
                     {t(partData.descKey)}
                   </p>
 
-
                   {/* Ozvia Butonu (subtitle4'te gösterilir) */}
                   {selectedPart === "subtitle4" && (
                     <a
@@ -193,7 +192,7 @@ export const ConfigPanel = () => {
               {/* Ozvia Logo - sadece Yapay Zeka ekranında */}
               <AnimatePresence>
                 {selectedPart === "subtitle4" && (
-                  <div className="flex flex-col items-center relative">
+                  <div className="flex flex-col items-center relative -mt-6">
                     <a
                       href="https://ozviai.com/"
                       target="_blank"
@@ -209,12 +208,12 @@ export const ConfigPanel = () => {
                       />
                     </a>
                     <div className="w-32 md:w-48 absolute top-full mt-2 pointer-events-none">
-                      <CurvedLoop 
+                      <CurvedLoop
                         marqueeText={t("model_labels.ozvia_ai_powered")}
                         speed={3}
                         curveAmount={0}
                         interactive={false}
-                        className="fill-white text-[4rem] md:text-[6rem] font-display"
+                        className="fill-white text-[4rem] md:text-[8rem] font-display"
                       />
                     </div>
                   </div>
