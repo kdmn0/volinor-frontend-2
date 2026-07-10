@@ -69,9 +69,30 @@ export const BeeController = ({ controlsRef }) => {
         ease: "power2.inOut",
         onUpdate: () => controlsRef.current?.update(),
       });
+    } else if (selectedPart === "subtitle3") {
+      // İleri Malzeme (subtitle3) için kamerayı patlayan parçaları görecek şekilde biraz geriye çekiyoruz
+      gsap.killTweensOf(camera.position);
+      gsap.killTweensOf(controlsRef.current.target);
+      gsap.to(camera.position, {
+        x: 2.0,
+        y: 1.0,
+        z: 2.0,
+        duration: 1.6,
+        ease: "power2.inOut",
+        onUpdate: () => controlsRef.current?.update(),
+      });
+      gsap.to(controlsRef.current.target, {
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 1.6,
+        ease: "power2.inOut",
+        onUpdate: () => controlsRef.current?.update(),
+      });
     } else if (
       prevPartRef.current === "subtitle2" ||
-      prevPartRef.current === "subtitle4"
+      prevPartRef.current === "subtitle4" ||
+      prevPartRef.current === "subtitle3"
     ) {
       gsap.killTweensOf(camera.position);
       gsap.killTweensOf(controlsRef.current.target);
