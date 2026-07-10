@@ -74,8 +74,8 @@ export const BeeController = ({ controlsRef }) => {
       gsap.killTweensOf(camera.position);
       gsap.killTweensOf(controlsRef.current.target);
       gsap.to(camera.position, {
-        x: 2.0,
-        y: 1.0,
+        x: 1.5,
+        y: -0.5,
         z: 2.0,
         duration: 1.6,
         ease: "power2.inOut",
