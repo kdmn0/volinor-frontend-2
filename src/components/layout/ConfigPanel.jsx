@@ -130,24 +130,7 @@ export const ConfigPanel = () => {
                   <p className="text-gray-400 text-sm mb-2 md:mb-4 max-h-32 md:max-h-none overflow-y-auto md:overflow-visible pr-1">
                     {t(partData.descKey)}
                   </p>
-                  {selectedPart === "subtitle3" && (
-                    <div className="w-full mt-4">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-[#ffb800] text-[10px] font-bold tracking-widest">
-                          DAYANIKLILIK
-                        </span>
-                        <span className="text-white text-xs">Yüksek</span>
-                      </div>
-                      <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: "92%" }}
-                          transition={{ delay: 0.5, duration: 1 }}
-                          className="h-full bg-gradient-to-r from-[#ffb800]/50 to-[#ffb800]"
-                        />
-                      </div>
-                    </div>
-                  )}
+
 
                   {/* Ozvia Butonu (subtitle4'te gösterilir) */}
                   {selectedPart === "subtitle4" && (
@@ -209,7 +192,10 @@ export const ConfigPanel = () => {
               {/* Ozvia Logo - sadece Yapay Zeka ekranında */}
               <AnimatePresence>
                 {selectedPart === "subtitle4" && (
-                  <a href="https://ozviai.com/" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://ozviai.com/"
+                    target="_blank"
+                    rel="noopener noreferrer">
                     <motion.img
                       src="/img/ozvia_logo.png"
                       alt="Ozvia Logo"

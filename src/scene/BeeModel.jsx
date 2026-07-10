@@ -141,7 +141,7 @@ export function BeeModel(props) {
     });
   }, [scene]);
 
-  const targetRedParts = ["Component55", "Component48", "ARI SON v2 v6.079"];
+  const targetRedParts = ["Component55", "Component48"];
 
   const redMaterials = useMemo(() => {
     const normalizeString = (str) => str.toLowerCase().replace(/[\s_.-]/g, "");
@@ -315,6 +315,7 @@ export function BeeModel(props) {
   return (
     <>
       <group ref={groupRef} {...props}>
+        <axesHelper args={[5]} />
         <primitive object={scene} />
       </group>
       <PartLabels explodeData={explodeData} selectedPart={selectedPart} />
@@ -340,7 +341,7 @@ const PartLabels = ({ explodeData, selectedPart }) => {
     {
       text: t("model_labels.energy_wing"),
       search: ["Component6", "wing", "kanat"],
-      offset: [1, 0.5, 0],
+      offset: [0.75, 0.2, 0],
       direction: "right",
     },
     {
@@ -352,7 +353,7 @@ const PartLabels = ({ explodeData, selectedPart }) => {
     {
       text: t("model_labels.high_modulus_composite"),
       search: ["joint", "leg", "bacak", "connect", "body"],
-      offset: [0.2, 0.19, -0.75],
+      offset: [0.66, -0.38, 0.5],
       direction: "left",
     },
   ];
@@ -442,7 +443,8 @@ const ExplodedLabel = ({
             {/* Noktadan çıkan çizgi */}
             <div
               className={`w-8 h-[1px] bg-gradient-to-r ${direction === "left" ? "from-transparent to-[#ffb800] ml-2" : "from-[#ffb800] to-transparent mr-2"}`}></div>
-            <div className="font-display text-[10px] sm:text-xs font-bold tracking-widest text-[#ffb800] bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-[#ffb800]/30 whitespace-nowrap drop-shadow-[0_0_10px_rgba(255,184,0,0.5)] shadow-[0_0_15px_rgba(0,0,0,0.7)]">
+            <div
+              className={`font-display text-[10px] sm:text-xs font-bold tracking-widest text-[#ffb800] bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-[#ffb800]/30 ${text && text.includes("\n") ? "whitespace-pre text-center" : "whitespace-nowrap"} drop-shadow-[0_0_10px_rgba(255,184,0,0.5)] shadow-[0_0_15px_rgba(0,0,0,0.7)]`}>
               {text}
             </div>
           </div>

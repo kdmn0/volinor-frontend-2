@@ -204,6 +204,6 @@
   "model_labels": {
     "energy_wing": "ENERGY HARVESTING WING",
     "rf_material": "RF 'TRANSPARENT' MATERIAL",
-    "high_modulus_composite": "HIGH MODULUS COMPOSITE"
+    "high_modulus_composite": "HIGH MODULUS\nCOMPOSITE"
   }
 }
