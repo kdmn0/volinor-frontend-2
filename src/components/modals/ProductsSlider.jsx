@@ -55,9 +55,12 @@ export const ProductsSlider = () => {
       
       {/* BACKGROUND DECORATIONS */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-2xl">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl opacity-5">
-          <div className="w-full h-full border-[1px] border-white rounded-full"></div>
-        </div>
+        {/* New Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-60" 
+          style={{ backgroundImage: "url('/img/product_bacground.png')" }}
+        ></div>
+
       </div>
 
       {/* TOP HEADER */}
@@ -193,13 +196,7 @@ export const ProductsSlider = () => {
       <div className="hidden md:block absolute top-6 left-6 w-8 h-8 border-t-[1.5px] border-l-[1.5px] border-[#ffb800]/40 z-20 pointer-events-none" />
       <div className="hidden md:block absolute bottom-6 right-6 w-8 h-8 border-b-[1.5px] border-r-[1.5px] border-[#ffb800]/40 z-20 pointer-events-none" />
       
-      {/* Right Side dashed line decor */}
-      <div className="hidden md:flex absolute top-1/2 right-4 -translate-y-1/2 flex-col gap-3 opacity-30 pointer-events-none">
-         <div className="w-1 h-1 bg-white"></div>
-         <div className="w-1 h-1 bg-white"></div>
-         <div className="w-1 h-1 bg-white"></div>
-         <div className="w-1 h-6 bg-white mt-4"></div>
-      </div>
+
       
     </div>
   );
