@@ -5,15 +5,7 @@ import { useTranslation } from "react-i18next";
 import VideoLibrary from "../../pages/VideoLibrary";
 import ProductsSlider from "./ProductsSlider";
 import DealershipSlider from "./DealershipSlider";
-
-const References = [
-  { id: 1, name: "Kara Kuvvetleri Komutanlığı", logo: "/logo/kara.png" },
-  { id: 2, name: "Asfat A.Ş", logo: "/logo/asfat.png" },
-  { id: 3, name: "TÜBİTAK MAM", logo: "/logo/tubitak.png" },
-  { id: 4, name: "Makine ve Kimya Endüstrisi A.Ş", logo: "/logo/mke.png" },
-  { id: 5, name: "Ermaksan ", logo: "/logo/ermaksan.png" },
-  { id: 6, name: "Lingua Yayıncılık", logo: "/logo/lingua.png" },
-];
+import ReferencesBox from "./ReferencesBox";
 
 const getMediaUrl = (url) => {
   if (!url) return "";
@@ -185,7 +177,8 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                   activePage === "iletisim" ||
                   activePage === "model-kutuphanesi" ||
                   activePage === "urunlerimiz" ||
-                  activePage === "bayiliklerimiz"
+                  activePage === "bayiliklerimiz" ||
+                  activePage === "referanslar"
                     ? "sr-only"
                     : "mb-4 md:mb-6"
                 }`}>
@@ -480,35 +473,8 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                 </div>
               )}
               {activePage === "referanslar" && (
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 items-center justify-items-center mt-8">
-                  {References.map((ref, index) => (
-                    <motion.div
-                      key={ref.id}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-center justify-center w-full max-w-[280px] h-[160px] group cursor-pointer">
-                      {ref.logo &&
-                      (ref.logo.includes(".png") ||
-                        ref.logo.includes(".jpg") ||
-                        ref.logo.includes(".svg") ||
-                        ref.logo.includes(".webp")) ? (
-                        <img
-                          src={
-                            ref.logo.startsWith("public")
-                              ? ref.logo.replace(/public[\\/]/, "/")
-                              : ref.logo
-                          }
-                          alt={ref.name}
-                          className="w-full h-full object-contain opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 drop-shadow-md"
-                        />
-                      ) : (
-                        <span className="text-white/40 text-xl font-bold uppercase tracking-widest group-hover:text-white/80 transition-colors">
-                          {ref.logo}
-                        </span>
-                      )}
-                    </motion.div>
-                  ))}
+                <div className="w-full mt-4 md:mt-6">
+                  <ReferencesBox />
                 </div>
               )}
               {activePage === "bayiliklerimiz" && (
