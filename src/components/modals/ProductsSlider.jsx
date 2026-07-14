@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 export const ProductsSlider = () => {
+  const { t } = useTranslation();
   const [products, setProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
@@ -70,7 +72,7 @@ export const ProductsSlider = () => {
             <span className="text-white">ÜRÜN</span><span className="text-[#ffb800]">LERİMİZ</span>
           </h1>
           <p className="text-white/40 text-xs md:text-sm mt-3 font-medium max-w-xl tracking-wider leading-relaxed">
-            Kalite sayfasına ulaştınız. Off the shelf hazır ürünlerimiz ve ar-ge ürünleri ile hizmetinizdeyiz.
+            {t("pages.urunlerimiz_desc")}
           </p>
         </div>
         {/* 3x3 dot grid icon */}

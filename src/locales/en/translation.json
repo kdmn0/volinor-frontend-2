@@ -43,11 +43,13 @@
   "pages": {
     "hakkimizda": "ABOUT US",
     "urunlerimiz": "OUR PRODUCTS",
+    "urunlerimiz_desc": "You have reached the quality page. We are at your service with our off-the-shelf ready products and R&D products.",
     "sertifika-ve-patentler": "CERTIFICATES & PATENTS\nBRANDS",
     "referanslar": "REFERENCES",
     "iletisim": "CONTACT",
     "model-kutuphanesi": "MODEL LIBRARY",
     "video-kutuphanesi": "VIDEO LIBRARY",
+    "video_kutuphanesi_desc": "Visualize technology: Leverage the power of our animation, simulation, and digital twin applications for your products and services.",
     "bayiliklerimiz": "DEALERSHIPS"
   },
   "seo": {
@@ -107,8 +109,8 @@
   },
   "auth": {
     "back_home": "Back to Home",
-    "tagline": "Manage your digital assets securely.",
-    "tagline_sub": "Launch your projects in seconds with next-generation cloud infrastructure.",
+    "tagline": "Model Library",
+    "tagline_sub": "We offer access to some of our models for our valued visitors for non-commercial use.",
     "login_title": "Welcome back",
     "login_subtitle": "Sign in to continue to your account.",
     "email_label": "Email address",

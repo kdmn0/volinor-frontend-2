@@ -43,11 +43,13 @@
   "pages": {
     "hakkimizda": "HAKKIMIZDA",
     "urunlerimiz": "ÜRÜNLERİMİZ",
+    "urunlerimiz_desc": "Kalite sayfasına ulaştınız. Off the shelf hazır ürünlerimiz ve ar-ge ürünleri ile hizmetinizdeyiz.",
     "sertifika-ve-patentler": "SERTİFİKA VE PATENTLERİMİZ\nMARKALARIMIZ",
     "referanslar": "REFERANSLAR",
     "iletisim": "İLETİŞİM",
     "model-kutuphanesi": "MODEL KÜTÜPHANESİ",
     "video-kutuphanesi": "VİDEO KÜTÜPHANESİ",
+    "video_kutuphanesi_desc": "Teknolojiyi görselleştirin: Ürün ve hizmetleriniz için animasyon, simülasyon ve dijital ikiz uygulamalarımızın gücünden faydalanın",
     "bayiliklerimiz": "BAYİLİKLERİMİZ"
   },
   "seo": {

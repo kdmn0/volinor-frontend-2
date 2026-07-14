@@ -195,7 +195,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
 
             {activePage === "video-kutuphanesi" && (
               <p className="text-white/70 text-sm md:text-base font-light max-w-3xl leading-relaxed mb-6">
-                Kurumlar ve firmalar için gerçekleştirdiğimiz animasyon çalışmalarına göz atın. Ürünlerinizi tanıtmak, kullanımını kolaylaştırmak ve anlaşılmasını sağlamak için animasyon, simülasyon ve dijital ikiz uygulamalarımızdan faydalanabilirsiniz..
+                {t("pages.video_kutuphanesi_desc")}
               </p>
             )}
 
